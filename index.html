@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Textoo — Intelligent SMS Automation for Loved Ones | Ultron Systems</title>
+  <meta name="description" content="Never forget a birthday, anniversary, or vital medication. Textoo remembers so you don't have to. Built by Ultron Systems.">
+  <meta name="author" content="Ultron Systems">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Textoo — Textoo Remembers, So You Don't Have To">
+  <meta property="og:description" content="Intelligent scheduled SMS for birthdays, anniversaries, medicine reminders, and daily habits. Powered by Ultron Systems.">
+  <meta property="og:image" content="assets/textoo_dashboard.png">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/textoo_mascot_transparent.png">
+
+  <!-- Google Fonts: Space Grotesk + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #09090b;
+      --bg-surface: #121215;
+      --bg-surface-elevated: #18181c;
+      --yellow: #FFE600;
+      --yellow-hover: #FFF04D;
+      --yellow-glow: rgba(255, 230, 0, 0.28);
+      --white: #ffffff;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --border: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.22);
+      --border-yellow: rgba(255, 230, 0, 0.45);
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(9, 9, 11, 0.92);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    /* Prominent, Larger Logo */
+    .brand img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 10px rgba(255, 230, 0, 0.2));
+      transition: transform 0.25s ease;
+    }
+
+    .brand:hover img {
+      transform: scale(1.06);
+    }
+
+    .brand-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .brand-by {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--yellow);
+    }
+
+    .btn-yellow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--yellow);
+      color: #000000;
+      padding: 0.7rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px var(--yellow-glow);
+      border: 1px solid var(--yellow);
+    }
+
+    .btn-yellow:hover {
+      background-color: var(--yellow-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(255, 230, 0, 0.45);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--white);
+      padding: 0.7rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+      background: rgba(255, 230, 0, 0.06);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 5.5rem 1.75rem 4rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.95rem;
+      background: rgba(255, 230, 0, 0.08);
+      border: 1px solid var(--border-yellow);
+      border-radius: var(--radius-sm);
+      color: var(--yellow);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.7rem;
+      line-height: 1.06;
+      font-weight: 800;
+      letter-spacing: -1.6px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-heading .yellow-highlight {
+      color: var(--yellow);
+      display: inline-block;
+    }
+
+    .hero-subheading {
+      color: var(--text-muted);
+      font-size: 1.18rem;
+      margin-bottom: 2.25rem;
+      max-width: 590px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-meta-strip {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .meta-label {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Device Showcase */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .visual-glow {
+      position: absolute;
+      width: 330px;
+      height: 490px;
+      background: radial-gradient(circle, var(--yellow-glow) 0%, transparent 65%);
+      filter: blur(55px);
+      z-index: 1;
+    }
+
+    .phone-container {
+      position: relative;
+      z-index: 2;
+      width: 300px;
+      background: #000000;
+      border-radius: 36px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(255, 230, 0, 0.3);
+    }
+
+    .phone-screen {
+      width: 100%;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .phone-screen img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .badge-card {
+      position: absolute;
+      z-index: 3;
+      background: #000000;
+      border: 1px solid var(--border-yellow);
+      padding: 0.75rem 1.15rem;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .badge-card.top {
+      top: 10%;
+      left: -15%;
+    }
+
+    .badge-card.bottom {
+      bottom: 12%;
+      right: -10%;
+    }
+
+    .badge-card .dot {
+      width: 10px;
+      height: 10px;
+      background-color: var(--yellow);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--yellow);
+    }
+
+    /* Section Global */
+    .section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 5.5rem 1.75rem;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-tag {
+      color: var(--yellow);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.9px;
+      line-height: 1.15;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    /* Scenarios Grid */
+    .scenarios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    .scenario-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    .scenario-card:hover {
+      border-color: var(--border-yellow);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+      background: var(--bg-surface-elevated);
+    }
+
+    .scenario-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      background: rgba(255, 230, 0, 0.08);
+      border: 1px solid var(--border-yellow);
+      border-radius: 4px;
+      color: var(--yellow);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      width: fit-content;
+      margin-bottom: 1.25rem;
+    }
+
+    .scenario-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--white);
+    }
+
+    .scenario-desc {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .scenario-preview {
+      background: #000000;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      font-size: 0.84rem;
+      color: #e4e4e7;
+      font-style: italic;
+      border-left: 3px solid var(--yellow);
+    }
+
+    /* Engine Technical Grid */
+    .engine-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .engine-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 2rem 1.75rem;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .engine-card:hover {
+      border-color: var(--border-yellow);
+      transform: translateY(-4px);
+    }
+
+    .engine-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 1rem;
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      background: rgba(255, 230, 0, 0.1);
+      border-radius: 4px;
+    }
+
+    .engine-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: var(--white);
+    }
+
+    .engine-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Contrast Grid: SMS vs Chat */
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-surface);
+    }
+
+    .contrast-col {
+      padding: 2.75rem 2.25rem;
+    }
+
+    .contrast-col.active {
+      background: #000000;
+      border-left: 1px solid var(--border-yellow);
+      position: relative;
+    }
+
+    .contrast-col.active::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--yellow);
+    }
+
+    .contrast-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .contrast-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .contrast-list li {
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .contrast-list li strong {
+      color: var(--white);
+    }
+
+    /* UI Module Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .gallery-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-img-wrap {
+      width: 100%;
+      height: 290px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .gallery-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-box:hover .gallery-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .gallery-content {
+      padding: 1.5rem;
+    }
+
+    .gallery-cat {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--yellow);
+      margin-bottom: 0.35rem;
+    }
+
+    .gallery-h {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .gallery-p {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    /* Privacy Banner */
+    .privacy-callout {
+      border: 1px solid var(--border-yellow);
+      background: linear-gradient(135deg, #141417 0%, #0d0d0f 100%);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2.5rem;
+      text-align: center;
+      margin: 2rem auto 0;
+      max-width: 960px;
+    }
+
+    .privacy-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+
+    .privacy-text {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: #000000;
+      padding: 4.5rem 1.75rem 2.5rem;
+      margin-top: 6rem;
+    }
+
+    .footer-wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-top: 1rem;
+      max-width: 380px;
+      line-height: 1.7;
+    }
+
+    .footer-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-list a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-list a:hover {
+      color: var(--yellow);
+    }
+
+    .contact-item {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .contact-item a {
+      color: var(--yellow);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 1024px) {
+      .scenarios-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .engine-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 3.5rem;
+      }
+      .hero-heading {
+        font-size: 2.7rem;
+      }
+      .hero-subheading {
+        margin: 0 auto 2rem;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-meta-strip {
+        justify-content: center;
+      }
+      .scenarios-grid {
+        grid-template-columns: 1fr;
+      }
+      .engine-grid {
+        grid-template-columns: 1fr;
+      }
+      .contrast-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-wrap {
+        grid-template-columns: 1fr;
+      }
+      .nav-menu {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <img src="assets/textoo_mascot_transparent.png" alt="Textoo Mascot Logo">
+        <div class="brand-title-wrap">
+          <span class="brand-title">Textoo</span>
+          <span class="brand-by">By Ultron Systems</span>
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#scenarios">Scenarios</a></li>
+        <li><a href="#why-sms">Why SMS</a></li>
+        <li><a href="#engine">The Engine</a></li>
+        <li><a href="#showcase">UI Showcase</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+      <a href="mailto:jigneshkireeuk@gmail.com" class="btn-yellow">
+        <span>Contact Developer</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="pill-tag">
+        <span>●</span>
+        <span>Textoo Remembers, So You Don't Have To</span>
+      </div>
+      <h1 class="hero-heading">
+        Never Forget What's <br>
+        <span class="yellow-highlight">Deeply Important.</span>
+      </h1>
+      <p class="hero-subheading">
+        Birthdays, anniversaries, critical medication, or daily care check-ins. Life gets busy, but your loved ones should never feel forgotten. Textoo dispatches your thoughtful, personalized messages right on time — automatically and reliably.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#scenarios" class="btn-yellow">
+          <span>Explore Real Scenarios</span>
+        </a>
+        <a href="#engine" class="btn-outline">
+          <span>The Automation Engine</span>
+        </a>
+      </div>
+
+      <div class="hero-meta-strip">
+        <div class="meta-item">
+          <span class="meta-value">100% On-Device</span>
+          <span class="meta-label">Zero Cloud Tracking</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-value">Dual-SIM Ready</span>
+          <span class="meta-label">Carrier Selection</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-value">Exact Minute</span>
+          <span class="meta-label">Doze-Proof Alarms</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="visual-glow"></div>
+      
+      <div class="badge-card top">
+        <div class="dot"></div>
+        <span>Midnight Birthday Wish • 12:00 AM</span>
+      </div>
+
+      <div class="phone-container">
+        <div class="phone-screen">
+          <img src="assets/textoo_dashboard.png" alt="Textoo Android Interface">
+        </div>
+      </div>
+
+      <div class="badge-card bottom">
+        <div class="dot"></div>
+        <span>Mom's Medication Reminder Sent</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenarios Section: Textoo Remembers, So You Don't Have To -->
+  <section id="scenarios" class="section">
+    <div class="section-header">
+      <span class="section-tag">Everyday Care Scenarios</span>
+      <h2 class="section-title">Textoo Remembers, So You Don't Have To</h2>
+      <p class="section-desc">
+        Whether you are asleep, stuck in traffic, or in a critical meeting, Textoo guarantees your warm, personal messages arrive at the exact moment they count.
+      </p>
+    </div>
+
+    <div class="scenarios-grid">
+      <!-- Scenario 1: Birthdays -->
+      <div class="scenario-card">
+        <div class="scenario-badge">🎂 Midnight Birthdays</div>
+        <h3 class="scenario-title">The First to Wish, Always</h3>
+        <p class="scenario-desc">
+          Schedule months ahead. Be the very first person to send a warm, personal midnight greeting at 12:00 AM sharp without having to force yourself to stay awake or setting alarms.
+        </p>
+        <div class="scenario-preview">
+          "Happy Birthday Sarah! Wishing you another year full of laughter and joy. Have the best day! 🎈✨"
+        </div>
+      </div>
+
+      <!-- Scenario 2: Anniversaries -->
+      <div class="scenario-card">
+        <div class="scenario-badge">💍 Relationship Milestones</div>
+        <h3 class="scenario-title">Anniversaries & Special Days</h3>
+        <p class="scenario-desc">
+          Never experience that sinking feeling of an anniversary slipping your mind. Schedule thoughtful love notes and relationship milestones that land directly on their phone screen.
+        </p>
+        <div class="scenario-preview">
+          "Happy Anniversary my love! 7 years today. Thank you for making every single day special. ❤️"
+        </div>
+      </div>
+
+      <!-- Scenario 3: Medicine Adherence -->
+      <div class="scenario-card">
+        <div class="scenario-badge">💊 Care & Health</div>
+        <h3 class="scenario-title">Elderly Parent Prescriptions</h3>
+        <p class="scenario-desc">
+          Ensure parents or grandparents never forget their afternoon heart medication or daily vitamins. Send automated recurring check-ins directly to their basic phone or smartphone.
+        </p>
+        <div class="scenario-preview">
+          "Dad, gentle reminder to please take your blood pressure tablet after lunch with a glass of water. Love you!"
+        </div>
+      </div>
+
+      <!-- Scenario 4: Habit Formation -->
+      <div class="scenario-card">
+        <div class="scenario-badge">🌱 Habits & Goals</div>
+        <h3 class="scenario-title">Daily Partner Accountability</h3>
+        <p class="scenario-desc">
+          Build positive shared habits with friends, study partners, or children. Schedule daily hydration check-ins, study prompts, and workout reminders that keep everyone consistent.
+        </p>
+        <div class="scenario-preview">
+          "Time for your afternoon hydration break! Drink a bottle of water and stretch for 5 minutes. 💧"
+        </div>
+      </div>
+
+      <!-- Scenario 5: Safe Travel -->
+      <div class="scenario-card">
+        <div class="scenario-badge">✈️ Safe Travels</div>
+        <h3 class="scenario-title">Transit & Flight Check-Ins</h3>
+        <p class="scenario-desc">
+          When flying or traveling in areas with patchy mobile data, pre-schedule automated check-ins for family members so they know you have landed safely the second your phone connects to cellular towers.
+        </p>
+        <div class="scenario-preview">
+          "Flight just touched down safely! Grabbing baggage now and heading to the taxi stand. Talk soon!"
+        </div>
+      </div>
+
+      <!-- Scenario 6: Dual-SIM Business & Personal -->
+      <div class="scenario-card">
+        <div class="scenario-badge">📱 Smart Multi-Line</div>
+        <h3 class="scenario-title">Dual-SIM Carrier Control</h3>
+        <p class="scenario-desc">
+          Keep work courtesies and family check-ins cleanly separated. Dispatch personal greetings from your primary SIM 1, and professional reminders from your business SIM 2 line.
+        </p>
+        <div class="scenario-preview">
+          "Dispatched seamlessly via SIM 2: Courtesy reminder for our project sync tomorrow at 10 AM."
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Carrier SMS (The Contrast Grid) -->
+  <section id="why-sms" class="section" style="padding-top: 1rem;">
+    <div class="section-header">
+      <span class="section-tag">Deliverability Engineering</span>
+      <h2 class="section-title">Why Carrier SMS Over WhatsApp?</h2>
+      <p class="section-desc">
+        Instant messaging platforms are noisy, frequently muted, and critically depend on Wi-Fi or active mobile data.
+      </p>
+    </div>
+
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <h3 class="contrast-title" style="color: #a1a1aa;">Chat Apps (WhatsApp / Telegram)</h3>
+        <ul class="contrast-list">
+          <li>✕ <strong>Requires Internet:</strong> If an elderly family member turns off mobile data or enters a low-coverage zone, critical medication alerts are missed.</li>
+          <li>✕ <strong>Buried in Noise:</strong> Important check-ins get lost under group forward messages, status updates, and notifications.</li>
+          <li>✕ <strong>Recipient Overhead:</strong> The other person must have a smartphone, active account, and compatible software version installed.</li>
+        </ul>
+      </div>
+
+      <div class="contrast-col active">
+        <h3 class="contrast-title" style="color: var(--yellow);">Textoo Native SMS Engine</h3>
+        <ul class="contrast-list">
+          <li>✓ <strong>100% Guaranteed Deliverability:</strong> Transmits via cellular towers directly to any handset — modern smartphone or basic keypad feature phone.</li>
+          <li>✓ <strong>High-Priority Attention:</strong> The native SMS inbox is clean, personal, and universally recognized for vital, urgent dispatches.</li>
+          <li>✓ <strong>Zero Recipient Setup:</strong> Your loved ones do not need to install any app or learn any new technology.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Engine Section (Populated & Technical) -->
+  <section id="engine" class="section">
+    <div class="section-header">
+      <span class="section-tag">Precision Architecture</span>
+      <h2 class="section-title">The Textoo Engine Under the Hood</h2>
+      <p class="section-desc">
+        Engineered with Android's highest standards of battery optimization, memory efficiency, and offline resilience.
+      </p>
+    </div>
+
+    <div class="engine-grid">
+      <div class="engine-card">
+        <span class="engine-num">01</span>
+        <h3 class="engine-title">Exact Alarm Scheduler</h3>
+        <p class="engine-desc">
+          Bypasses standard Android Doze batching delays using high-precision AlarmManager APIs, ensuring your time-critical medicine alarms trigger to the exact minute.
+        </p>
+      </div>
+
+      <div class="engine-card">
+        <span class="engine-num">02</span>
+        <h3 class="engine-title">Dual-SIM Carrier Router</h3>
+        <p class="engine-desc">
+          Directly interfaces with Android Telephony SubscriptionManager, letting you bind specific automations to SIM 1 or SIM 2 dynamically.
+        </p>
+      </div>
+
+      <div class="engine-card">
+        <span class="engine-num">03</span>
+        <h3 class="engine-title">100% On-Device Room DB</h3>
+        <p class="engine-desc">
+          Zero external API dependencies. All messages, schedules, and recipient logs are stored locally in an encrypted SQLite Room database on your physical device.
+        </p>
+      </div>
+
+      <div class="engine-card">
+        <span class="engine-num">04</span>
+        <h3 class="engine-title">Reboot Resilience</h3>
+        <p class="engine-desc">
+          Integrated BootReceiver automatically reschedules all active recurring alarms the instant your phone powers on, ensuring no automations are ever dropped.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual Showcase (UI Modules) -->
+  <section id="showcase" class="section" style="padding-top: 1rem;">
+    <div class="section-header">
+      <span class="section-tag">Visual Walkthrough</span>
+      <h2 class="section-title">Inside the Textoo Interface</h2>
+      <p class="section-desc">
+        Designed with Jetpack Compose for fluid, ergonomic operation and high-contrast accessibility.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-box">
+        <div class="gallery-img-wrap">
+          <img src="assets/textoo_automations.jpg" alt="Automations Dashboard">
+        </div>
+        <div class="gallery-content">
+          <div class="gallery-cat">Workflow Engine</div>
+          <h4 class="gallery-h">Granular Automations</h4>
+          <p class="gallery-p">Quick-toggle routines, custom interval schedules, and instant manual triggers.</p>
+        </div>
+      </div>
+
+      <div class="gallery-box">
+        <div class="gallery-img-wrap">
+          <img src="assets/textoo_permissions_dialog.jpg" alt="Permissions Diagnostic">
+        </div>
+        <div class="gallery-content">
+          <div class="gallery-cat">Transparency</div>
+          <h4 class="gallery-h">Diagnostic Center</h4>
+          <p class="gallery-p">Full visibility into SMS, contacts, and exact alarm states with direct system shortcuts.</p>
+        </div>
+      </div>
+
+      <div class="gallery-box">
+        <div class="gallery-img-wrap">
+          <img src="assets/textoo_settings_theme.jpg" alt="Themes & Settings">
+        </div>
+        <div class="gallery-content">
+          <div class="gallery-cat">Personalization</div>
+          <h4 class="gallery-h">Custom Theme Matrix</h4>
+          <p class="gallery-p">Includes Tokyo Night, Dracula Void, Solar Flare, and Clinical Studio White.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Callout -->
+  <section class="section" style="padding-top: 1rem;">
+    <div class="privacy-callout">
+      <span class="section-tag" style="display: inline-block;">Privacy By Design</span>
+      <h2 class="privacy-title">Your Messages Never Leave Your Device</h2>
+      <p class="privacy-text">
+        Textoo does not operate remote servers or data tracking networks. All your contacts, message texts, scheduled times, and execution histories remain encrypted on your physical device. We never read, sell, or collect your personal conversations.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="privacy.html" class="btn-yellow">Read Complete Privacy Policy</a>
+        <a href="mailto:jigneshkireeuk@gmail.com" class="btn-outline">Contact Ultron Systems</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-wrap">
+      <div>
+        <div class="brand">
+          <img src="assets/textoo_mascot_transparent.png" alt="Textoo Logo" style="width: 48px; height: 48px;">
+          <div class="brand-title-wrap">
+            <span class="brand-title">Textoo</span>
+            <span class="brand-by">Ultron Systems</span>
+          </div>
+        </div>
+        <p class="footer-desc">
+          Automated personal SMS reminders for medicine, habits, birthdays, anniversaries, and staying close to loved ones. Developed by <strong>Ultron Systems</strong>.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-list">
+          <li><a href="#scenarios">Care Scenarios</a></li>
+          <li><a href="#why-sms">Why SMS</a></li>
+          <li><a href="#engine">The Engine</a></li>
+          <li><a href="#showcase">UI Showcase</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-heading">Publisher & Contact</h4>
+        <div class="contact-item" style="margin-bottom: 1rem;">
+          <span style="color: #71717a; font-size: 0.8rem; text-transform: uppercase;">Organization</span>
+          <strong style="color: #fff;">Ultron Systems</strong>
+        </div>
+        <div class="contact-item">
+          <span style="color: #71717a; font-size: 0.8rem; text-transform: uppercase;">Direct Developer Inquiries</span>
+          <a href="mailto:jigneshkireeuk@gmail.com">jigneshkireeuk@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Ultron Systems. All rights reserved.</span>
+      <span>Textoo • Intelligent SMS Automation</span>
+    </div>
+  </footer>
+
+</body>
+</html>

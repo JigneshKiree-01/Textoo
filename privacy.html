@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Textoo | Ultron Systems</title>
+  <meta name="description" content="Privacy Policy for Textoo by Ultron Systems. Comprehensive disclosure on data safety, SEND_SMS permissions, and Google AdMob SDK.">
+  <link rel="icon" type="image/png" href="assets/textoo_mascot_transparent.png">
+
+  <!-- Google Fonts: Space Grotesk + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #09090b;
+      --bg-surface: #121215;
+      --yellow: #FFE600;
+      --yellow-glow: rgba(255, 230, 0, 0.2);
+      --white: #ffffff;
+      --text-muted: #a1a1aa;
+      --border: rgba(255, 255, 255, 0.12);
+      --border-yellow: rgba(255, 230, 0, 0.35);
+      --radius-sm: 6px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--white);
+      line-height: 1.7;
+      padding: 2.5rem 1.5rem;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 3.5rem 2.75rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+    }
+
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .brand-by {
+      font-size: 0.7rem;
+      color: var(--yellow);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .back-btn {
+      color: var(--yellow);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid var(--border-yellow);
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--yellow);
+      color: #000;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .meta-tagline {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .callout-box {
+      background: #000000;
+      border-left: 3px solid var(--yellow);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 2.5rem;
+    }
+
+    .callout-box p {
+      color: #e4e4e7;
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-top: 2.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 0.96rem;
+    }
+
+    ul {
+      color: var(--text-muted);
+      padding-left: 1.4rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    li strong {
+      color: var(--white);
+    }
+
+    .contact-card {
+      background: #000;
+      border: 1px solid var(--border-yellow);
+      padding: 1.5rem;
+      border-radius: var(--radius-sm);
+      margin-top: 1.5rem;
+    }
+
+    .contact-card a {
+      color: var(--yellow);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-bar">
+      <a href="index.html" class="brand">
+        <img src="assets/textoo_mascot_transparent.png" alt="Textoo Logo">
+        <div>
+          <div class="brand-title">Textoo</div>
+          <div class="brand-by">Ultron Systems</div>
+        </div>
+      </a>
+      <a href="index.html" class="back-btn">← Back to Overview</a>
+    </div>
+
+    <h1>Privacy Policy</h1>
+    <div class="meta-tagline">
+      Effective Date: November 2026 &nbsp;|&nbsp; Publisher: <strong>Ultron Systems</strong>
+    </div>
+
+    <div class="callout-box">
+      <p>
+        <strong>100% On-Device Architecture:</strong> Textoo does not maintain remote cloud servers or third-party databases. All scheduled routines, recipient numbers, and message bodies are stored locally in your phone's encrypted private Room database.
+      </p>
+    </div>
+
+    <h2>1. Overview & Purpose</h2>
+    <p>
+      This Privacy Policy describes how <strong>Ultron Systems</strong> ("we", "us", "our") handles data within the <strong>Textoo</strong> Android application. Textoo is designed specifically to help users maintain medication adherence, establish healthy routines, and foster authentic personal connections with family and loved ones through scheduled SMS dispatches.
+    </p>
+
+    <h2>2. Sensitive Permissions & Declarations</h2>
+    <p>
+      To execute its core functionality without requiring users to manually press "Send" at inconvenient times (e.g. while driving, working, or sleeping), Textoo requests the following specific Android permissions:
+    </p>
+    <ul>
+      <li>
+        <strong>SEND_SMS (Core Functional Purpose):</strong> Enables Textoo to dispatch user-scheduled messages via the cellular network. The application does not read external incoming SMS messages, does not monitor incoming conversations, and only sends messages specifically authored and scheduled by the user.
+      </li>
+      <li>
+        <strong>READ_CONTACTS (Address Book Picker):</strong> Used exclusively to let you choose recipients from your existing device contact book with one tap. Contacts are never uploaded or synced to external servers.
+      </li>
+      <li>
+        <strong>SCHEDULE_EXACT_ALARM:</strong> Necessary to ensure that time-critical medication doses and health reminders fire with minute-level precision, uninhibited by Android Doze power-saving states.
+      </li>
+      <li>
+        <strong>READ_PHONE_STATE:</strong> Enables multi-SIM detection so you can specify whether an automation should be routed via SIM 1 or SIM 2.
+      </li>
+    </ul>
+
+    <h2>3. Advertising via Google AdMob</h2>
+    <p>
+      Textoo integrates the <strong>Google Mobile Ads (AdMob) SDK</strong> to display banner ads, native video cards, and opt-in rewarded video ads to unlock cosmetic dark themes.
+    </p>
+    <p>
+      Google AdMob may collect and process anonymous device telemetry (such as your Android Advertising ID, general device type, and country/city location) to deliver personalized or non-personalized advertisements according to Google's Ad Policies:
+      <br>
+      <a href="https://policies.google.com/technologies/ads" target="_blank" style="color: var(--yellow);">https://policies.google.com/technologies/ads</a>
+    </p>
+
+    <h2>4. Data Retention & Deletion</h2>
+    <p>
+      Because all data is stored strictly on your local device, you retain absolute control over your records. You can delete individual automations or history logs at any time from within the app, or delete all application data through your Android system settings.
+    </p>
+
+    <h2>5. Developer & Publisher Contact</h2>
+    <p>
+      For privacy inquiries, questions regarding data practices, or Google Play review inquiries, please contact the developer directly:
+    </p>
+
+    <div class="contact-card">
+      <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.35rem;">Ultron Systems</div>
+      <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Developer & Official Publisher</div>
+      <div>Direct Email: <a href="mailto:jigneshkireeuk@gmail.com">jigneshkireeuk@gmail.com</a></div>
+    </div>
+
+    <footer>
+      © 2026 Ultron Systems. All rights reserved.
+    </footer>
+  </div>
+
+</body>
+</html>
